@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>19773612619908311 - ServerCopy</title>
+    <link href="https://surokkha.gov.bd/favicon.png" rel="icon">
+    <link href="https://surokkha.gov.bd/favicon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
+
+    <style>
+        @import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+
+        @page {
+            size: A4;
+            margin: auto;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SolaimanLipi', sans-serif;
+            font-weight: normal;
+            display: flex;
+            background: linear-gradient(135deg, #e0e5ec 0%, #c8d0e0 100%);
+            height: 100vh;
+            overflow: hidden; /* No Body Scrollbar */
+        }
+
+        /* Glassmorphism & Neumorphism Compact Single-Page Sidebar */
+        .sidebar {
+            width: 410px;
+            height: calc(100vh - 30px);
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px 22px;
+            box-shadow: 10px 10px 30px #be304, -10px -10px 30px #ffffff;
+            box-sizing: border-box;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .sidebar-header .author-subtitle {
+            font-size: 12px;
+            color: #4a5568;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
+        }
+
+        /* Neumorphic Tab Buttons */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            background: #e0e5ec;
+            padding: 5px;
+            border-radius: 14px;
+            box-shadow: inset 2px 2px 5px #b8bec5, inset -2px -2px 5px #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px 6px;
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            font-weight: bold;
+            color: #555;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: #e0e5ec;
+            color: #03a9f4;
+            box-shadow: 3px 3px 6px #b8bec5, -3px -3px 6px #ffffff;
+        }
+
+        /* Tab Content Area (Fixed Height, Larger Inputs) */
+        .tab-content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        /* Larger Neumorphic Input Fields */
+        .input-group input, 
+        .input-group textarea {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-family: inherit;
+            background: #e0e5ec;
+            box-shadow: inset 2px 2px 5px #b8bec5, inset -2px -2px 5px #ffffff;
+            outline: none;
+            color: #1e293b;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            box-shadow: inset 1px 1px 3px #b8bec5, inset -1px -1px 3px #ffffff, 0 0 4px rgba(3, 169, 244, 0.4);
+        }
+
+        .input-group textarea {
+            resize: none;
+            height: 65px;
+        }
+
+        .file-upload-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .file-upload-btn {
+            padding: 9px 12px;
+            border-radius: 10px;
+            background: #e0e5ec;
+            box-shadow: 2px 2px 5px #b8bec5, -2px -2px 5px #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .file-upload-btn:active {
+            box-shadow: inset 2px 2px 3px #b8bec5, inset -2px -2px 3px #ffffff;
+        }
+
+        /* Action Buttons */
+        .action-btns {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-print {
+            background: linear-gradient(145deg, #03b6ff, #0390d5);
+            color: white;
+            box-shadow: 3px 3px 8px #b8bec5, -3px -3px 8px #ffffff;
+        }
+
+        .btn-download {
+            background: linear-gradient(145deg, #52be56, #439e47);
+            color: white;
+            box-shadow: 3px 3px 8px #b8bec5, -3px -3px 8px #ffffff;
+        }
+
+        /* Sidebar Footer / Copyright */
+        .sidebar-footer {
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
+        }
+
+        /* Main Document Layout */
+        .main-content {
+            margin-left: 430px;
+            width: calc(100% - 430px);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .background {
+            background-color: lightgrey;
+            position: relative;
+            width: 750px;
+            height: 1065px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            transform: scale(0.88); /* Scaled down perfectly to fit 1 page on desktop screens */
+            transform-origin: center center;
+        }
+
+        .crane {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        #present_addr,
+        #permanent_addr {
+            text-align: left;
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: white !important;
+                overflow: visible !important;
+            }
+
+            .sidebar {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .background {
+                transform: scale(1) !important;
+            }
+
+            html, body {
+                width: 210mm !important;
+                height: 297mm !important;
+                background-color: #fff !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Single Page Dynamic Tabbed Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <h2>স্মার্ট এডিটর প্যানেল</h2>
+                <div class="author-subtitle">Developed by Ramim Talukder</div>
+            </div>
+
+            <!-- Tab Switchers -->
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('tab1', event)"><i class="fa-solid fa-id-card"></i> পরিচয়</button>
+                <button class="tab-btn" onclick="switchTab('tab2', event)"><i class="fa-solid fa-user"></i> ব্যক্তিগত</button>
+                <button class="tab-btn" onclick="switchTab('tab3', event)"><i class="fa-solid fa-location-dot"></i> ঠিকানা</button>
+            </div>
+
+            <div class="tab-content-container">
+                <!-- Section 1: NID & Basic Info -->
+                <div id="tab1" class="tab-content active">
+                    <div class="input-group">
+                        <label>ছবি (URL / ফাইল আপলোড)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" id="photo_url_input" oninput="updateText('photo', this.value, 'src')" value="https://api.server24x.site/unofficial/image/6dcd82f....jpg" placeholder="Image URL">
+                            <label for="photo_file_input" class="file-upload-btn"><i class="fa-solid fa-upload"></i> আপলোড</label>
+                            <input type="file" id="photo_file_input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>জাতীয় পরিচয় পত্র নম্বর</label>
+                        <input type="text" id="input_nid" oninput="updateNID(this.value)" value="5078199022">
+                    </div>
+
+                    <div class="input-group">
+                        <label>পিন নম্বর</label>
+                        <input type="text" oninput="updateText('nid_father', this.value)" value="19773612619908311">
+                    </div>
+
+                    <div class="input-group">
+                        <label>পূর্ববর্তী এনআইডি নম্বর</label>
+                        <input type="text" oninput="updateText('from_number', this.value)" value="3612619908311">
+                    </div>
+
+                    <div class="input-group">
+                        <label>ভোটার এলাকা</label>
+                        <input type="text" oninput="updateText('spouse', this.value)" value="চুনারুঘাট উপজেলা আওতাধীন">
+                    </div>
+                </div>
+
+                <!-- Section 2: Personal Information -->
+                <div id="tab2" class="tab-content">
+                    <div class="input-group">
+                        <label>নাম (বাংলা)</label>
+                        <input type="text" oninput="updateText('name_bn', this.value)" value="">
+                    </div>
+
+                    <div class="input-group">
+                        <label>নাম (ইংরেজি)</label>
+                        <input type="text" id="input_name_en" oninput="updateNameEn(this.value)" value="MD. A. MAJID">
+                    </div>
+
+                    <div class="input-group">
+                        <label>জন্ম তারিখ (YYYY-MM-DD)</label>
+                        <input type="text" id="input_dob" oninput="updateDOB(this.value)" value="1977-01-01">
+                    </div>
+
+                    <div class="input-group">
+                        <label>পিতার নাম</label>
+                        <input type="text" oninput="updateText('fathers_name', this.value)" value="মোঃ আঃ দলিল">
+                    </div>
+
+                    <div class="input-group">
+                        <label>মাতার নাম</label>
+                        <input type="text" oninput="updateText('mothers_name', this.value)" value="মোছাঃ ছালেহা আক্তার">
+                    </div>
+
+                    <div class="input-group">
+                        <label>লিঙ্গ</label>
+                        <input type="text" oninput="updateText('gender', this.value)" value="male">
+                    </div>
+                </div>
+
+                <!-- Section 3: Location & Additional -->
+                <div id="tab3" class="tab-content">
+                    <div class="input-group">
+                        <label>জন্মস্থান</label>
+                        <input type="text" oninput="updateText('birth_place', this.value)" value="হবিগঞ্জ">
+                    </div>
+
+                    <div class="input-group">
+                        <label>রক্তের গ্রুপ</label>
+                        <input type="text" oninput="updateText('occupation', this.value)" value="">
+                    </div>
+
+                    <div class="input-group">
+                        <label>বর্তমান ঠিকানা</label>
+                        <textarea oninput="updateText('present_addr', this.value)">" বাসা/হোন্ডিং: , গ্রাম/রাস্তা: নরপতি, মৌজা/মহাল্লা: , থানা: চুনারুঘাট, ডাকঘর: নরপতি - 3322, উপজেলা: চুনারুঘাট, জেলা: হবিগঞ্জ, বিভাগ: সিলেট"</textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>স্থায়ী ঠিকানা</label>
+                        <textarea oninput="updateText('permanent_addr', this.value)">" বাসা/হোন্ডিং: , গ্রাম/রাস্তা: নরপতি, মৌজা/মহাল্লা: , থানা: চুনারুঘাট, ডাকঘর: নরপতি - 3322, উপজেলা: চুনারুঘাট, জেলা: হবিগঞ্জ, বিভাগ: সিলেট"</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Actions & Copyright Footer -->
+        <div>
+            <div class="action-btns">
+                <button class="btn btn-print" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i> প্রিন্ট
+                </button>
+                <button class="btn btn-download" onclick="window.print()">
+                    <i class="fa-solid fa-download"></i> পিডিএফ
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                &copy; <span id="year"></span> Created by <b>Ramim Talukder</b>. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <!-- Main NID View Area -->
+    <div class="main-content">
+        <div class="background">
+            <img class="crane" src="https://i.ibb.co.com/8DLRMYTC/cbimage.jpg" height="1000px" width="750px">
+
+            <div style="position: absolute; left: 30%; top: 8%; width: auto; font-size: 16px; color: rgb(255, 224, 0);">
+                <b>National Identity Registration Wing (NIDW)</b>
+            </div>
+
+            <div style="position: absolute; left: 37%; top: 11%; width: auto; font-size: 14px; color: rgb(255, 47, 161);">
+                <b>Select Your Search Category</b>
+            </div>
+
+            <div style="position: absolute; left: 45%; top: 12.8%; width: auto; font-size: 12px; color: rgb(8, 121, 4);">Search By NID / Voter No.</div>
+            <div style="position: absolute; left: 45%; top: 14.3%; width: auto; font-size: 12px; color: rgb(7, 119, 184);">Search By Form No.</div>
+
+            <div style="position: absolute; left: 30%; top: 16.9%; width: auto; font-size: 12px; color: rgb(252, 0, 0);">
+                <b>NID or Voter No*</b>
+            </div>
+
+            <div style="position: absolute; left: 45%; top: 16.9%; width: auto; font-size: 12px; color: rgb(143, 143, 143);">NID</div>
+            <div style="position: absolute; left: 62.9%; top: 17.1%; width: auto; font-size: 11px; color: rgb(255, 255, 255);">Submit</div>
+            <div style="position: absolute; left: 89%; top: 11.55%; width: auto; font-size: 11px; color: #fff;">Home</div>
+
+            <div style="position: absolute; left: 37%; top: 27%; width: auto; font-size: 16px; color: rgb(7, 7, 7);">
+                <b>জাতীয় পরিচিতি তথ্য</b>
+            </div>
+
+            <div style="position: absolute; left: 37%; top: 29.7%; width: auto; font-size: 13px; color: rgb(7, 7, 7);">জাতীয় পরিচয় পত্র নম্বর</div>
+            <div id="nid_no" style="position: absolute; left: 55%; top: 29.7%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">5078199022</div>
+
+            <div style="position: absolute; left: 37%; top: 32.5%; width: auto; font-size: 13px; color: rgb(7, 7, 7);">পিন নম্বর</div>
+            <div id="nid_father" style="position: absolute; left: 55%; top: 32.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">19773612619908311</div>
+
+            <div style="position: absolute; left: 37%; top: 35%; width: auto; font-size: 13px; color: rgb(7, 7, 7);">পূর্ববর্তী এনআইডি নম্বর</div>
+            <div id="from_number" style="position: absolute; left: 55%; top: 35%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">3612619908311</div>
+
+            <div style="position: absolute; left: 37%; top: 37.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);"> ভোটার এলাকা</div>
+            <div id="spouse" style="position: absolute; left: 55%; top: 37.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">চুনারুঘাট উপজেলা আওতাধীন</div>
+
+            <div style="position: absolute; left: 37%; top: 40.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">জন্মস্থান</div>
+            <div id="birth_place" style="position: absolute; left: 55%; top: 40.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">হবিগঞ্জ</div>
+
+            <div style="position: absolute; left: 37%; top: 43%; width: auto; font-size: 16px; color: rgb(7, 7, 7);">
+                <b>ব্যক্তিগত তথ্য</b>
+            </div>
+
+            <div style="position: absolute; left: 37%; top: 45.6%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">নাম (বাংলা)</div>
+            <div id="name_bn" style="position: absolute; font-weight: bold; left: 55%; top: 45.6%; width: auto; font-size: 14px; color: rgb(7, 7, 7);"></div>
+
+            <div style="position: absolute; left: 37%; top: 48.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">নাম (ইংরেজি)</div>
+            <div id="name_en" style="position: absolute; left: 55%; top: 48.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">MD. A. MAJID</div>
+
+            <div style="position: absolute; left: 37%; top: 51%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">জন্ম তারিখ</div>
+            <div id="dob" style="position: absolute; left: 55%; top: 51%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">1977-01-01</div>
+
+            <div style="position: absolute; left: 37%; top: 53.7%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">পিতার নাম</div>
+            <div id="fathers_name" style="position: absolute; left: 55%; top: 53.7%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">মোঃ আঃ দলিল</div>
+
+            <div style="position: absolute; left: 37%; top: 56.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">মাতার নাম</div>
+            <div id="mothers_name" style="position: absolute; left: 55%; top: 56.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">মোছাঃ ছালেহা আক্তার</div>
+
+            <div style="position: absolute; left: 37%; top: 59%; width: auto; font-size: 16px; color: rgb(7, 7, 7);">
+                <b>অন্যান্য তথ্য</b>
+            </div>
+
+            <div style="position: absolute; left: 37%; top: 62.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">লিঙ্গ</div>
+            <div id="gender" style="position: absolute; left: 55%; top: 62.2%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">male</div>
+
+            <div style="position: absolute; left: 37%; top: 64.8%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">জন্মবার</div>
+            <div id="mobile_no" style="position: absolute; left: 55%; top: 64.8%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">শনিবার</div>
+
+            <div style="position: absolute; left: 37%; top: 67.5%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">রক্তের গ্রুপ</div>
+            <div id="occupation" style="position: absolute; left: 55%; top: 67.5%; width: auto; font-size: 14px; color: rgb(255, 0, 0);"></div>
+
+            <div style="position: absolute; left: 37%; top: 70%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">বয়স</div>
+            <div id="religion" style="position: absolute; left: 55%; top: 70%; width: auto; font-size: 14px; color: rgb(7, 7, 7);">৪৯ বছর ৮ মাস ১৪ দিন</div>
+
+            <div style="position: absolute; left: 37%; top: 73%; width: auto; font-size: 16px; color: rgb(7, 7, 7);">
+                <b>বর্তমান ঠিকানা</b>
+            </div>
+
+            <div id="present_addr" style="position: absolute; left: 37%; top: 75.5%; width: 48%; font-size: 12px; color: rgb(7, 7, 7);">
+                " বাসা/হোন্ডিং: , গ্রাম/রাস্তা: নরপতি, মৌজা/মহাল্লা: , থানা: চুনারুঘাট, ডাকঘর: নরপতি - 3322, উপজেলা: চুনারুঘাট, জেলা: হবিগঞ্জ, বিভাগ: সিলেট"
+            </div>
+
+            <div style="position: absolute; left: 37%; top: 82%; width: auto; font-size: 16px; color: rgb(7, 7, 7);">
+                <b>স্থায়ী ঠিকানা</b>
+            </div>
+
+            <div id="permanent_addr" style="position: absolute; left: 37%; top: 84.5%; width: 48%; font-size: 12px; color: rgb(7, 7, 7);">
+                " বাসা/হোন্ডিং: , গ্রাম/রাস্তা: নরপতি, মৌজা/মহাল্লা: , থানা: চুনারুঘাট, ডাকঘর: নরপতি - 3322, উপজেলা: চুনারুঘাট, জেলা: হবিগঞ্জ, বিভাগ: সিলেট"
+            </div>
+
+            <div style="position: absolute; top: 92%; width: 100%; font-size: 12px; text-align: center; color: rgb(255, 0, 0);">
+                "উপরে প্রদর্শিত তথ্যসমূহ জাতীয় পরিচয়পত্র সংশ্লিষ্ট, ভোটার তালিকার সাথে সরাসরি সম্পর্কযুক্ত নয়।"
+            </div>
+
+            <div style="position: absolute; top: 93.5%; width: 100%; text-align: center; font-size: 12px; color: rgb(3, 3, 3);">
+                "This is Software Generated Report From Bangladesh Election Commission, Signature & Seal Aren't Required."
+            </div>
+
+            <div style="position: absolute; left: 16%; top: 25.7%; width: auto; font-size: 12px; color: rgb(3, 3, 3);">
+                <img id="photo" src="https://api.server24x.site/unofficial/image/6dcd82f....jpg" height="140px" width="121px" style="border-radius: 10px">
+            </div>
+
+            <div id="name_en2" style="position: absolute; display: flex; font-weight: bold; left: 15.5%; top: 39.6%; height: 32px; width: 130px; font-size: 13px; color: rgb(7, 7, 7); margin: auto; align-items: center;" align="center">
+                <div id="name_en2_text" style="flex: 1;">MD. A. MAJID</div>
+            </div>
+
+            <div style="position: absolute; font-weight: bold; left: 15.5%; top: 44.0%; height: 32px; width: 130px; font-size: 13px; color: rgb(7, 7, 7); margin: auto; align-items: center;" align="center">
+                <img id="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MD. A. MAJID 5078199022 1977-01-01" height="100px" width="100px">
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const banglaDigits = {'0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯'};
+        const banglaDays = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+
+        // Tab Switcher Logic
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            if(event) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        function toBanglaNum(num) {
+            return num.toString().replace(/\d/g, d => banglaDigits[d]);
+        }
+
+        function updateText(elementId, value, attribute = null) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                if (attribute) {
+                    element.setAttribute(attribute, value);
+                } else {
+                    element.innerText = value;
+                }
+            }
+        }
+
+        // Image File Upload Handler
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    document.getElementById('photo').src = imageUrl;
+                    document.getElementById('photo_url_input').value = imageUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateNameEn(val) {
+            updateText('name_en', val);
+            updateText('name_en2_text', val);
+            autoUpdateQR();
+        }
+
+        function updateNID(val) {
+            updateText('nid_no', val);
+            autoUpdateQR();
+        }
+
+        function autoUpdateQR() {
+            const name = document.getElementById('input_name_en').value;
+            const nid = document.getElementById('input_nid').value;
+            const dob = document.getElementById('input_dob').value;
+            const qrData = `${name} ${nid} ${dob}`;
+            
+            const qrElement = document.getElementById('qr');
+            if (qrElement) {
+                qrElement.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrData);
+            }
+        }
+
+        function updateDOB(dobString) {
+            updateText('dob', dobString);
+            autoUpdateQR();
+
+            const birthDate = new Date(dobString);
+            if (isNaN(birthDate.getTime())) return;
+
+            const dayIndex = birthDate.getDay();
+            updateText('mobile_no', banglaDays[dayIndex]);
+
+            const today = new Date();
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const ageString = `${toBanglaNum(years)} বছর ${toBanglaNum(months)} মাস ${toBanglaNum(days)} দিন`;
+            updateText('religion', ageString);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateDOB(document.getElementById('input_dob').value);
+            document.getElementById('year').innerText = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+
+</html>
